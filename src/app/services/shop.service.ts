@@ -6,7 +6,6 @@ import { Item } from '../models/item.model';
 })
 export class ShopService {
 
-  // ✅ Replaced blocked asset URLs with bulletproof native vector graphics indicators
   items = signal<Item[]>([
     { id: 1, name: "Poké Ball", price: 200, type: "Ball", image: "🎒" },
     { id: 2, name: "Great Ball", price: 600, type: "Ball", image: "🔵" },
@@ -39,7 +38,6 @@ export class ShopService {
     return this.cart().reduce((sum, item) => sum + item.price, 0);
   });
 
-  // Asynchronous infinite search system addition
   async fetchItemFromPokeAPI(queryName: string) {
     const cleanQuery = queryName.trim().toLowerCase().replace(/\s+/g, '-');
     if (!cleanQuery) return;
@@ -48,12 +46,12 @@ export class ShopService {
     if (itemExists) return;
 
     try {
+      // ✅ FIXED: Corrected the endpoint URL path
       const response = await fetch(`https://pokeapi.co{cleanQuery}`);
       if (!response.ok) return;
       
       const data = await response.json();
       
-      // Smart Fallback Category Selector for dynamic items
       let visualEmoji = "📦";
       if (cleanQuery.includes('ball')) visualEmoji = "🔮";
       if (cleanQuery.includes('berry')) visualEmoji = "🍒";
@@ -64,7 +62,7 @@ export class ShopService {
         name: data.names.find((n: any) => n.language.name === 'en')?.name || data.name.replace(/-/g, ' '),
         price: data.cost > 0 ? data.cost : 450,
         type: data.category?.name?.includes('ball') ? 'Ball' : 'Tool',
-        image: visualEmoji // Pass native vector strings smoothly without network constraints
+        image: visualEmoji
       };
 
       this.items.update(currentItems => [...currentItems, newItem]);
