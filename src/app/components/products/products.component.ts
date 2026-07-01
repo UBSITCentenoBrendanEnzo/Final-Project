@@ -20,7 +20,8 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {}
 
   async onSearch() {
-    const query = this.searchQuery.trim().toLowerCase();
+    // ✅ Converts space characters to hyphens automatically (e.g., "heavy ball" -> "heavy-ball")
+    const query = this.searchQuery.trim().toLowerCase().replace(/\s+/g, '-');
     if (query.length > 2) {
       await this.shop.fetchItemFromPokeAPI(query);
     }
@@ -33,8 +34,11 @@ export class ProductsComponent implements OnInit {
   get filteredItems(): Item[] {
     const query = this.searchQuery.trim().toLowerCase();
     if (!query) return this.shop.items();
+    
+    // ✅ Flexible filter handles names with spaces or hyphens normally
     return this.shop.items().filter(item => 
       item.name.toLowerCase().includes(query) || 
+      item.name.toLowerCase().replace(/\s+/g, '-').includes(query) ||
       item.type.toLowerCase().includes(query)
     );
   }
