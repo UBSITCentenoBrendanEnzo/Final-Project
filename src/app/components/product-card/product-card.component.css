@@ -1,0 +1,84 @@
+.card{
+
+
+    background:white;
+    
+    border-radius:25px;
+    
+    padding:25px;
+    
+    text-align:center;
+    
+    
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.1);
+    
+    
+    transition:.3s;
+    
+    
+    }
+    
+    
+    
+    .card:hover{
+    
+    
+    transform:translateY(-10px);
+    
+    
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.2);
+    
+    
+    }
+    
+    
+    
+    img{
+    
+    width:120px;
+    
+    height:120px;
+    
+    }
+    
+    
+    
+    h2{
+    
+    color:#333;
+    
+    }
+    
+    
+    
+    button{
+    
+    
+    background:#2563eb;
+    
+    color:white;
+    
+    border:none;
+    
+    padding:12px 25px;
+    
+    border-radius:20px;
+    
+    
+    font-weight:bold;
+    
+    
+    }
+    
+    
+    
+    button:hover{
+    
+    
+    background:#1d4ed8;
+    
+    cursor:pointer;
+    
+    }

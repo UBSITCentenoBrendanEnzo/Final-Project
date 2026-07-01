@@ -1,0 +1,32 @@
+<h1>Pokemon Item Mart</h1>
+<p class="subtitle">Choose your trainer supplies!</p>
+
+<!-- Live PokeAPI Infinite Search Input Bar -->
+<div class="row justify-content-center mb-4">
+  <div class="col-md-6">
+    <div class="input-group shadow-sm rounded-pill overflow-hidden bg-white p-1 border">
+      <span class="input-group-text bg-white border-0 text-muted pl-3">🔍</span>
+      <input 
+        type="text" 
+        [(ngModel)]="searchQuery" 
+        (input)="onSearch()" 
+        class="form-control border-0 shadow-none py-2" 
+        placeholder="Type item name (e.g., master-ball, rare-candy, zinc)...">
+    </div>
+  </div>
+</div>
+
+<div class="products">
+  @for(item of filteredItems; track item.id){
+    <app-product-card
+      [product]="item"
+      (add)="addProduct($event)">
+    </app-product-card>
+  }
+</div>
+
+@if(filteredItems.length === 0){
+  <div class="text-center py-4">
+    <p class="text-muted">Querying live Pokédex global databases registers...</p>
+  </div>
+}

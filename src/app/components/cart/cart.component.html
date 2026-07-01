@@ -1,0 +1,134 @@
+<div class="cart-container">
+
+
+    <h1>
+    🛒 Shopping Cart
+    </h1>
+    
+    
+    
+    @if(shop.cart().length === 0){
+    
+    
+    <div class="empty-cart">
+    
+    <h2>
+    Cart is empty
+    </h2>
+    
+    
+    <p>
+    Add some Pokemon items first!
+    </p>
+    
+    
+    </div>
+    
+    
+    }
+    
+    
+    
+    @else{
+    
+    
+    
+    @for(item of shop.cart(); track item.id){
+    
+    
+    
+    <div class="cart-item">
+    
+    
+    <img
+    [src]="item.image"
+    >
+    
+    
+    
+    <div class="cart-details">
+    
+    
+    <h2>
+    {{item.name}}
+    </h2>
+    
+    
+    
+    <p>
+    Type: {{item.type}}
+    </p>
+    
+    
+    
+    <p class="price">
+    ₱{{item.price}}
+    </p>
+    
+    
+    </div>
+    
+    
+    
+    </div>
+    
+    
+    }
+    
+    
+    
+    <div class="summary">
+    
+    
+    <h2>
+    
+    Total:
+    
+    <span>
+    ₱{{shop.total()}}
+    </span>
+    
+    </h2>
+    
+    
+    
+    <div class="cart-buttons">
+    
+    
+    
+    <button
+    class="purchase"
+    (click)="purchase()"
+    >
+    
+    Purchase
+    
+    </button>
+    
+    
+    
+    
+    <button
+    class="clear"
+    (click)="clear()"
+    >
+    
+    Clear Cart
+    
+    </button>
+    
+    
+    
+    </div>
+    
+    
+    
+    </div>
+    
+    
+    
+    }
+    
+    
+    
+    </div>

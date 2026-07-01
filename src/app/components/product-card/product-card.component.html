@@ -1,0 +1,24 @@
+<div class="card text-center p-3 border-0 shadow-xs h-100 d-flex flex-column justify-content-between">
+    
+    <!-- ✅ Swapped image element out for a beautiful local vector icon container box -->
+    <div class="d-flex align-items-center justify-content-center bg-light rounded-4 mx-auto my-3" style="width: 70px; height: 70px; font-size: 2.2rem; line-height: 1;">
+        {{ product.image }}
+    </div>
+
+    <h2 class="fw-bold fs-5 text-dark text-truncate px-2 mb-1">
+        {{ product.name }}
+    </h2>
+
+    <p class="text-muted small text-uppercase font-monospace tracking-wider mb-2" style="font-size: 0.75rem;">
+        Type: {{ product.type }}
+    </p>
+
+    <p class="fw-bold text-primary mb-3">
+        Price: ₱{{ product.price }}
+    </p>
+
+    <button (click)="add.emit(product)" class="btn btn-primary w-100 rounded-pill py-2 fw-bold text-uppercase shadow-xs" style="font-size: 0.8rem;">
+        Add To Cart
+    </button>
+
+</div>
