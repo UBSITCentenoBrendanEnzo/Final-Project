@@ -1,14 +1,10 @@
 <div class="cart-container">
 
-
     <h1>
     🛒 Shopping Cart
     </h1>
     
-    
-    
     @if(shop.cart().length === 0){
-    
     
     <div class="empty-cart">
     
@@ -16,119 +12,74 @@
     Cart is empty
     </h2>
     
-    
     <p>
     Add some Pokemon items first!
     </p>
     
-    
     </div>
-    
     
     }
     
-    
-    
     @else{
     
-    
-    
-    @for(item of shop.cart(); track item.id){
-    
-    
+    @for(item of shop.cart(); track $index){
     
     <div class="cart-item">
     
-    
-    <img
-    [src]="item.image"
-    >
-    
-    
+    <!-- ✅ FIXED: Swapped out the broken img tag for a beautifully sized native emoji container text block -->
+    <span style="font-size: 2.2rem; display: flex; align-items: center; justify-content: center; width: 65px; height: 65px; background: #f8fafc; border-radius: 12px; margin-right: 15px;">
+        {{item.image}}
+    </span>
     
     <div class="cart-details">
-    
     
     <h2>
     {{item.name}}
     </h2>
     
-    
-    
     <p>
     Type: {{item.type}}
     </p>
-    
-    
     
     <p class="price">
     ₱{{item.price}}
     </p>
     
-    
     </div>
     
-    
-    
     </div>
-    
     
     }
     
-    
-    
     <div class="summary">
     
-    
     <h2>
-    
     Total:
-    
     <span>
     ₱{{shop.total()}}
     </span>
-    
     </h2>
     
-    
-    
     <div class="cart-buttons">
-    
-    
     
     <button
     class="purchase"
     (click)="purchase()"
     >
-    
     Purchase
-    
     </button>
-    
-    
-    
     
     <button
     class="clear"
     (click)="clear()"
     >
-    
     Clear Cart
-    
     </button>
     
-    
-    
     </div>
     
-    
-    
     </div>
-    
-    
     
     }
-    
-    
     
     </div>

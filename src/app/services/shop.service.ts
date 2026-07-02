@@ -1,10 +1,14 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http'; // 👈 1. IMPORT ANGULAR'S HTTP UTILITY
 import { Item } from '../models/item.model';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
+  // Inject the Angular network framework controller tool natively
+  private http = inject(HttpClient); 
 
   items = signal<Item[]>([
     { id: 1, name: "Poké Ball", price: 200, type: "Ball", image: "🎒" },
@@ -46,11 +50,12 @@ export class ShopService {
     if (itemExists) return;
 
     try {
-      // ✅ FIXED: Corrected the endpoint URL path
-      const response = await fetch(`https://pokeapi.co{cleanQuery}`);
-      if (!response.ok) return;
+      // ✅ FIXED: Using Angular's official http network client module instead of standard JavaScript fetch
+      const data: any = await firstValueFrom(
+        this.http.get(`https://pokeapi.co{cleanQuery}`)
+      );
       
-      const data = await response.json();
+      if (!data) return;
       
       let visualEmoji = "📦";
       if (cleanQuery.includes('ball')) visualEmoji = "🔮";
@@ -67,7 +72,7 @@ export class ShopService {
 
       this.items.update(currentItems => [...currentItems, newItem]);
     } catch (error) {
-      console.error('PokeAPI search failed:', error);
+      console.error('PokeAPI search query network stream failure:', error);
     }
   }
 }
