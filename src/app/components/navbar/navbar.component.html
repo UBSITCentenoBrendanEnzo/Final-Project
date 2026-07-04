@@ -1,44 +1,23 @@
 <nav>
 
-
-    <div class="logo">
-    
+  <div class="logo">
     ⚡ Pokemon Mart
+  </div>
+  
+  <div class="links">
     
-    </div>
-    
-    
-    
-    <div class="links">
-    
-    <a 
-    routerLink=""
-    routerLinkActive="active"
-    [routerLinkActiveOptions]="{exact:true}">
-    
-    Home
-    
+    <a routerLink="/home" routerLinkActive="active">
+      Home
     </a>
     
-    
-    <a 
-    routerLink="/products"
-    routerLinkActive="active">
-    
-    Products
-    
+    <a routerLink="/products" routerLinkActive="active">
+      Products
     </a>
     
-    
-    <a 
-    routerLink="/cart"
-    routerLinkActive="active">
-    
-    Cart ({{shop.cart().length}})
-    
+    <a routerLink="/cart" routerLinkActive="active">
+      Cart ({{shop.cart().length}})
     </a>
     
-    </div>
-    
-    
-    </nav>
+  </div>
+  
+</nav>

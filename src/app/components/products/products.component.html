@@ -1,17 +1,18 @@
-<h1>Pokemon Item Mart</h1>
-<p class="subtitle">Choose your trainer supplies!</p>
+<div class="storefront-hero">
+  <h1>Pokémon Item Mart</h1>
+  <p class="subtitle">Equip your trainer bag with verified, high-performance battle supplies</p>
+</div>
 
-<!-- Live PokeAPI Infinite Search Input Bar -->
-<div class="row justify-content-center mb-4">
-  <div class="col-md-6">
-    <div class="input-group shadow-sm rounded-pill overflow-hidden bg-white p-1 border">
-      <span class="input-group-text bg-white border-0 text-muted pl-3">🔍</span>
+<div class="row justify-content-center mb-5">
+  <div class="col-md-8 col-lg-6">
+    <div class="search-glass-container">
+      <span class="search-pulse-icon">🔍</span>
       <input 
         type="text" 
         [(ngModel)]="searchQuery" 
-        (input)="onSearch()" 
-        class="form-control border-0 shadow-none py-2" 
-        placeholder="Type item name (e.g., master-ball, rare-candy, zinc)...">
+        (input)="onSearchChange()" 
+        class="search-field-input" 
+        placeholder="Search supply inventory name (e.g., heavy-ball, zinc, potion)...">
     </div>
   </div>
 </div>
@@ -25,8 +26,9 @@
   }
 </div>
 
-@if(filteredItems.length === 0){
-  <div class="text-center py-4">
-    <p class="text-muted">Querying live Pokédex global databases registers...</p>
+@if(filteredItems.length === 0 && searchQuery.trim().length > 2){
+  <div class="search-loading-state text-center py-5">
+    <div class="spinner-growth-indicator" role="status"></div>
+    <p class="loading-label mt-3">Scanning inventory system indexes data streams...</p>
   </div>
 }

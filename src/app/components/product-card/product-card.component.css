@@ -1,84 +1,145 @@
-.card{
+.premium-item-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 2.25rem 1.75rem;
+  text-align: center;
+  position: relative;
+  border: 1px solid rgba(15, 23, 42, 0.04);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04), 0 4px 12px -5px rgba(0, 0, 0, 0.02);
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
 
+.premium-item-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 50px -15px rgba(15, 23, 42, 0.08), 0 10px 20px -10px rgba(59, 76, 202, 0.04);
+}
 
-    background:white;
-    
-    border-radius:25px;
-    
-    padding:25px;
-    
-    text-align:center;
-    
-    
-    box-shadow:
-    0 10px 25px rgba(0,0,0,.1);
-    
-    
-    transition:.3s;
-    
-    
-    }
-    
-    
-    
-    .card:hover{
-    
-    
-    transform:translateY(-10px);
-    
-    
-    box-shadow:
-    0 15px 35px rgba(0,0,0,.2);
-    
-    
-    }
-    
-    
-    
-    img{
-    
-    width:120px;
-    
-    height:120px;
-    
-    }
-    
-    
-    
-    h2{
-    
-    color:#333;
-    
-    }
-    
-    
-    
-    button{
-    
-    
-    background:#2563eb;
-    
-    color:white;
-    
-    border:none;
-    
-    padding:12px 25px;
-    
-    border-radius:20px;
-    
-    
-    font-weight:bold;
-    
-    
-    }
-    
-    
-    
-    button:hover{
-    
-    
-    background:#1d4ed8;
-    
-    cursor:pointer;
-    
-    }
+.card-category-badge {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  font-size: 0.725rem;
+  font-weight: 800;
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.card-visual-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 1.5rem auto 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glow-orb {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  filter: blur(15px);
+  opacity: 0.08;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.premium-item-card:hover .glow-orb {
+  transform: scale(1.3);
+  opacity: 0.15;
+}
+
+.emoji-asset {
+  font-size: 3.75rem;
+  z-index: 2;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.premium-item-card:hover .emoji-asset {
+  transform: scale(1.15) rotate(5deg);
+}
+
+.card-item-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.25px;
+}
+
+.card-price-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 1px;
+  margin-bottom: 1.75rem;
+}
+
+.currency-token {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #3b4cca;
+}
+
+.price-value {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #3b4cca;
+}
+
+.action-add-btn {
+  width: 100%;
+  background: #f8fafc;
+  color: #0f172a;
+  border: none;
+  font-weight: 700;
+  padding: 0.85rem 0;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.premium-item-card:hover .action-add-btn {
+  background: #3b4cca;
+  color: #ffffff;
+}
+
+.btn-icon-arrow {
+  transform: translateX(-4px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.premium-item-card:hover .btn-icon-arrow {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.theme-ball .card-category-badge { background: rgba(59, 76, 202, 0.08); color: #3b4cca; }
+.theme-ball .glow-orb { background-color: #3b4cca; }
+
+.theme-medicine .card-category-badge { background: rgba(16, 185, 129, 0.08); color: #10b981; }
+.theme-medicine .glow-orb { background-color: #10b981; }
+.theme-medicine .price-value, .theme-medicine .currency-token { color: #10b981; }
+.theme-medicine:hover .action-add-btn { background: #10b981; }
+
+.theme-berry .card-category-badge { background: rgba(239, 68, 68, 0.08); color: #ef4444; }
+.theme-berry .glow-orb { background-color: #ef4444; }
+.theme-berry .price-value, .theme-berry .currency-token { color: #ef4444; }
+.theme-berry:hover .action-add-btn { background: #ef4444; }
+
+.theme-tool .card-category-badge { background: rgba(245, 158, 11, 0.08); color: #f59e0b; }
+.theme-tool .glow-orb { background-color: #f59e0b; }
+.theme-tool .price-value, .theme-tool .currency-token { color: #f59e0b; }
+.theme-tool:hover .action-add-btn { background: #f59e0b; }
+
+.theme-hold-item .card-category-badge { background: rgba(139, 92, 246, 0.08); color: #8b5cf6; }
+.theme-hold-item .glow-orb { background-color: #8b5cf6; }
+.theme-hold-item .price-value, .theme-hold-item .currency-token { color: #8b5cf6; }
+.theme-hold-item:hover .action-add-btn { background: #8b5cf6; }
