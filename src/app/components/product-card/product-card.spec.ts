@@ -1,5 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+/**
+ * Name: Brendan Centeno
+ * Date: July 4, 2026
+ * Assignment Title: E-Commerce Platform - Pokémon Item Mart
+ */
 
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductCardComponent } from './product-card.component';
 
 describe('ProductCardComponent', () => {

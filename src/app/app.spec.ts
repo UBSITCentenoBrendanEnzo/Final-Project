@@ -1,3 +1,9 @@
+/**
+ * Name: Brendan Centeno
+ * Date: July 4, 2026
+ * Assignment Title: E-Commerce Platform - Pokémon Item Mart
+ */
+
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 
