@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+/**
+ * Name: Brendan Centeno
+ * Date: July 4, 2026
+ * Assignment Title: E-Commerce Platform - Pokémon Item Mart
+ */
+
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ShopService } from '../../services/shop.service';
@@ -12,34 +18,51 @@ import { ProductCardComponent } from '../product-card/product-card.component';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
-  searchQuery: string = '';
+export class ProductsComponent implements OnInit, OnDestroy {
+
+  searchQuery = '';
+  private debounceTimeout: any;
 
   constructor(public shop: ShopService) {}
 
   ngOnInit(): void {}
 
-  async onSearch() {
-    // ✅ Converts space characters to hyphens automatically (e.g., "heavy ball" -> "heavy-ball")
-    const query = this.searchQuery.trim().toLowerCase().replace(/\s+/g, '-');
+  onSearchChange(): void {
+    if (this.debounceTimeout) {
+      clearTimeout(this.debounceTimeout);
+    }
+
+    const query = this.searchQuery.trim().toLowerCase();
+    
     if (query.length > 2) {
-      await this.shop.fetchItemFromPokeAPI(query);
+      this.debounceTimeout = setTimeout(async () => {
+        await this.shop.fetchItemFromPokeAPI(query);
+      }, 350);
     }
   }
 
-  addProduct(item: Item) {
+  addProduct(item: Item): void {
     this.shop.addToCart(item);
   }
 
   get filteredItems(): Item[] {
     const query = this.searchQuery.trim().toLowerCase();
-    if (!query) return this.shop.items();
     
-    // ✅ Flexible filter handles names with spaces or hyphens normally
+    if (!query || query.length <= 2) {
+      return this.shop.items().filter(item => item.id <= 15);
+    }
+    
     return this.shop.items().filter(item => 
-      item.name.toLowerCase().includes(query) || 
+      item.name.toLowerCase().includes(query) ||
       item.name.toLowerCase().replace(/\s+/g, '-').includes(query) ||
       item.type.toLowerCase().includes(query)
     );
   }
+
+  ngOnDestroy(): void {
+    if (this.debounceTimeout) {
+      clearTimeout(this.debounceTimeout);
+    }
+  }
+
 }
