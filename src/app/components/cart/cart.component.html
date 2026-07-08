@@ -1,46 +1,129 @@
-<div class="cart-container-box">
-  <div class="cart-header-row">
-    <h2>🛍️ Shopping Bag Summary</h2>
-    <span class="cart-counter-pill">{{ shop.cart().length }} Items Registered</span>
+@if(purchaseSuccess){
+
+  <div class="alert alert-success text-center mb-4">
+
+    ✅ Purchase completed successfully!
+
+    Thank you for shopping at Pokémon Item Mart, Trainer!
+
   </div>
 
+}
+
+<div class="cart-container-box">
+
+  <div class="cart-header-row">
+
+    <h2>🛍️ Shopping Bag Summary</h2>
+
+    <span class="cart-counter-pill">
+      {{ shop.cart().length }} Items Registered
+    </span>
+
+  </div>
+
+
   @if(shop.cart().length === 0){
+
     <div class="cart-empty-panel text-center py-5">
-      <div class="empty-icon-bounce">🛒</div>
+
+      <div class="empty-icon-bounce">
+        🛒
+      </div>
+
       <h3>Your trainer bag is empty</h3>
-      <p>Head back to the catalog products page to stock up on supplies.</p>
-    </div>
-  } @else {
-    <div class="cart-items-stream">
-      @for(item of shop.cart(); track $index){
-        <div class="checkout-item-row">
-          <div class="item-visual-avatar">
-            {{ item.image }}
-          </div>
-          <div class="item-meta-details">
-            <h4>{{ item.name }}</h4>
-            <span class="meta-badge">{{ item.type }}</span>
-          </div>
-          <div class="item-cost-display">
-            ₱{{ item.price }}
-          </div>
-        </div>
-      }
+
+      <p>
+        Head back to the catalog products page to stock up on supplies.
+      </p>
+
     </div>
 
-    <div class="checkout-footer-card">
-      <div class="footer-meta-pricing">
-        <span class="label-text">Grand Summary Total:</span>
-        <h3 class="grand-value-text">₱{{ shop.total() }}</h3>
-      </div>
-      <div class="footer-action-buttons">
-        <button class="btn-secondary-clear" (click)="clear()">
-          Clear Bag
-        </button>
-        <button class="btn-primary-checkout" (click)="purchase()">
-          Complete Purchase
-        </button>
-      </div>
+
+  } @else {
+
+
+    <div class="cart-items-stream">
+
+      @for(item of shop.cart(); track $index){
+
+        <div class="checkout-item-row">
+
+          <div class="item-visual-avatar">
+
+            {{ item.image }}
+
+          </div>
+
+
+          <div class="item-meta-details">
+
+            <h4>
+              {{ item.name }}
+            </h4>
+
+            <span class="meta-badge">
+              {{ item.type }}
+            </span>
+
+          </div>
+
+
+          <div class="item-cost-display">
+
+            ₱{{ item.price }}
+
+          </div>
+
+        </div>
+
+      }
+
     </div>
+
+
+
+    <div class="checkout-footer-card">
+
+      <div class="footer-meta-pricing">
+
+        <span class="label-text">
+          Grand Summary Total:
+        </span>
+
+        <h3 class="grand-value-text">
+          ₱{{ shop.total() }}
+        </h3>
+
+      </div>
+
+
+      <div class="footer-action-buttons">
+
+        <button
+          class="btn-secondary-clear"
+          (click)="clear()"
+          [disabled]="shop.cart().length === 0">
+
+          Clear Bag
+
+        </button>
+
+
+        <button
+          class="btn-primary-checkout"
+          (click)="purchase()"
+          [disabled]="shop.cart().length === 0">
+
+          Complete Purchase
+
+        </button>
+
+      </div>
+
+    </div>
+
+
   }
+
 </div>

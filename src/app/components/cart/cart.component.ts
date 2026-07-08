@@ -16,14 +16,39 @@ import { ShopService } from '../../services/shop.service';
   styleUrl: './cart.component.css'
 })
 export class CartComponent {
+
+  purchaseSuccess = false;
+
   constructor(public shop: ShopService) {}
 
   clear(): void {
-    this.shop.clearCart();
+
+    if (confirm('Are you sure you want to clear your shopping bag?')) {
+
+      this.shop.clearCart();
+
+    }
+
   }
 
   purchase(): void {
-    alert("Purchase successful! Thank you Trainer!");
+
+    if (this.shop.cart().length === 0) {
+
+      return;
+
+    }
+
+    this.purchaseSuccess = true;
+
     this.shop.clearCart();
+
+    setTimeout(() => {
+
+      this.purchaseSuccess = false;
+
+    }, 3000);
+
   }
+
 }

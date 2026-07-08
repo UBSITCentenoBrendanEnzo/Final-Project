@@ -1,34 +1,108 @@
 <div class="storefront-hero">
+
   <h1>Pokémon Item Mart</h1>
-  <p class="subtitle">Equip your trainer bag with verified, high-performance battle supplies</p>
+
+  <p class="subtitle">
+    Equip your trainer bag with verified, high-performance battle supplies
+  </p>
+
 </div>
+
 
 <div class="row justify-content-center mb-5">
+
   <div class="col-md-8 col-lg-6">
+
     <div class="search-glass-container">
-      <span class="search-pulse-icon">🔍</span>
-      <input 
-        type="text" 
-        [(ngModel)]="searchQuery" 
-        (input)="onSearchChange()" 
-        class="search-field-input" 
-        placeholder="Search supply inventory name (e.g., heavy-ball, zinc, potion)...">
+
+      <span class="search-pulse-icon">
+        🔍
+      </span>
+
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        (input)="onSearchChange()"
+        class="search-field-input"
+        placeholder="Search Pokémon item (example: potion, pokeball, revive)...">
+
     </div>
+
   </div>
+
 </div>
 
+
+@if(searchQuery.trim().length > 0 && searchQuery.trim().length < 3) {
+
+  <div class="alert alert-info text-center mt-4">
+
+    <h5>
+      Search Too Short
+    </h5>
+
+    <p class="mb-0">
+      Please enter at least 3 characters to search Pokémon items.
+    </p>
+
+  </div>
+
+}
+
+
 <div class="products">
-  @for(item of filteredItems; track item.id){
+
+  @for(item of filteredItems; track item.id) {
+
     <app-product-card
       [product]="item"
       (add)="addProduct($event)">
     </app-product-card>
+
   }
+
 </div>
 
-@if(filteredItems.length === 0 && searchQuery.trim().length > 2){
+
+@if(shop.loading()) {
+
   <div class="search-loading-state text-center py-5">
-    <div class="spinner-growth-indicator" role="status"></div>
-    <p class="loading-label mt-3">Scanning inventory system indexes data streams...</p>
+
+    <div class="spinner-border text-primary" role="status">
+
+      <span class="visually-hidden">
+        Loading...
+      </span>
+
+    </div>
+
+    <p class="loading-label mt-3">
+      Searching Pokémon Item Database...
+    </p>
+
   </div>
+
+}
+
+
+@if(shop.searchFinished() && shop.searchError()) {
+
+  <div class="alert alert-warning text-center mt-4">
+
+    <h5>
+      Item Not Found
+    </h5>
+
+    <p class="mb-0">
+
+      No Pokémon item named
+      <strong>
+        {{ searchQuery }}
+      </strong>
+      was found.
+
+    </p>
+
+  </div>
+
 }
